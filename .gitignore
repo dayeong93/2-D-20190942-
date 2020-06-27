@@ -2,7 +2,16 @@
 # Created by https://www.toptal.com/developers/gitignore/api/windows,python,flask,code
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,python,flask,code
 
+#가상환경 폴더 ###
 env/
+
+## 게임 save.txt ##
+save.txt
+
+### db파일 ##
+*.db
+
+
 ### Code ###
 .vscode/*
 !.vscode/settings.json

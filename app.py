@@ -28,7 +28,7 @@ def gamestart():
         print(character['items'])
     return "{}님 코알라가 {}능력을 이용해서 음식을 얻었습니다".format(character["name"], character["items"][0])
 
-
+# 중간고사 
 @app.route('/input/<int:num>')
 def input_num(num):
     if num == 1:
@@ -46,7 +46,7 @@ def input_num(num):
    
 
 
-#로그인
+# 12주차 과제 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':

@@ -1,5 +1,5 @@
 {
-    "name": "name",
+    "name": "도라에몽",
     "level": 1,
     "items": [
         "애교",

@@ -1,5 +1,5 @@
 {
-    "name": "진구",
+    "name": "name",
     "level": 1,
     "items": [
         "애교",

@@ -1,6 +1,9 @@
-<!DOCTYPE html>
-<html>
-<body>
+{% extends "layout.html" %}
+{% block title %}로그인 페이지{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
 
 <h2>로그인을 해주세요</h2>
 
@@ -12,5 +15,4 @@
   <input type="submit" value="확인">
 </form> 
 
-</body>
-</html>
+{% endblock %}

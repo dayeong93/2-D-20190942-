@@ -11,6 +11,11 @@ app = Flask(__name__)
 def index():
     return "게임을 시작하기위해 닉네임을 정해주세요. ==> hello/사용하실 닉네임"
 
+
+@app.route('/mainhtml/')
+def mainhtml():
+    return render_template('main.html')
+
 @app.route('/hello/')
 def hello():
     return 'Hello, World!'
@@ -47,6 +52,23 @@ def input_num(num):
 
 
 # 12주차 과제 
+#@app.route('/login', methods=['GET', 'POST'])
+#def login():
+#    if request.method == 'GET':
+#      return render_template('login.html')
+#    else:
+#        id = request.form['id']
+#        pw = request.form['pw']
+#        print (id,type(id))
+#        print (pw,type(pw))
+#        # id와 pw가 임의로 정한 값이랑 비교해서 맞으면 맞다 틀리면 틀리다
+#        if id == 'abc' and pw == '1234':
+#            return "안녕하세요~ {}님".format(id)
+#        else:
+#            return "아이디 또는 패스워드를 확인하세요."
+
+
+# 12주차 과제   id/pw sqlite db에 저장 하고 로그인 세션 처리 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
@@ -56,11 +78,35 @@ def login():
         pw = request.form['pw']
         print (id,type(id))
         print (pw,type(pw))
-        # id와 pw가 임의로 정한 값이랑 비교해서 맞으면 맞다 틀리면 틀리다
-        if id == 'abc' and pw == '1234':
-            return "안녕하세요~ {}님".format(id)
+        # id와 pw가 db 값이랑 비교해서 맞으면 맞다 틀리면 틀리다
+        ret = dbdb.select_user(id, pw)
+        print(ret[2])
+        if ret != None: 
+            return "안녕하세요~ {}님".format(ret[2])
         else:
             return "아이디 또는 패스워드를 확인하세요."
+
+
+# 회원가입
+@app.route('/join', methods=['GET', 'POST'])
+def join():
+    if request.method == 'GET':
+      return render_template('join.html')
+    else:
+        id = request.form['id']
+        pw = request.form['pw']
+        print (id,type(id))
+        print (pw,type(pw))
+        ret = dbdb.check_id(id)
+        if ret != None:
+            return '''
+              <script>
+              alert('다른 아이디를 사용하세요');
+              location.href='/join';
+              </script>
+              '''
+        dbdb.insert_user(id, pw, name)
+        return redirect(url_for('login'))
 
 @app.route('/form')
 def form():
@@ -69,7 +115,7 @@ def form():
 @app.route('/method', methods=['GET', 'POST'])
 def method():
     if request.method == 'GET':
-        return 'GET 으로 전송이다.'
+       return 'GET 으로 전송이다.'
     else:
         num = request.form['num']
         name = request.form['name']
